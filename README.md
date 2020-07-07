@@ -30,7 +30,7 @@
 
   ## License
 
-  ![License](https://img.shields.io/badge/Apache_2.0-orange.svg)
+  ![License](https://img.shields.io/badge/License-Apache_2.0-orange.svg)
 
   ## Contributors
 
