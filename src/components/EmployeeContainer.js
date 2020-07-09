@@ -4,10 +4,10 @@ import Row from "./Row";
 import Col from "./Col";
 import Card from "./Card";
 import SearchForm from "./SearchForm";
-import MovieDetail from "./MovieDetail";
+import UserDetail from "./UserDetail";
 import API from "../utils/API";
 
-class OmdbContainer extends Component {
+class EmployeeContainer extends Component {
   state = {
     result: {},
     search: ""
@@ -15,10 +15,10 @@ class OmdbContainer extends Component {
 
   // When this component mounts, search for the movie "The Matrix"
   componentDidMount() {
-    this.searchMovies("The Matrix");
+    this.searchUsers("John Smith");
   }
 
-  searchMovies = query => {
+  searchUsers = query => {
     API.search(query)
       .then(res => this.setState({ result: res.data }))
       .catch(err => console.log(err));
@@ -35,7 +35,7 @@ class OmdbContainer extends Component {
   // When the form is submitted, search the OMDB API for the value of `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
-    this.searchMovies(this.state.search);
+    this.searchUsers(this.state.search);
   };
 
   render() {
@@ -44,19 +44,18 @@ class OmdbContainer extends Component {
         <Row>
           <Col size="md-8">
             <Card
-              heading={this.state.result.Title || "Search for a Movie to Begin"}
+              heading={this.state.result.name || "Employee Directory"}
             >
-              {this.state.result.Title ? (
-                <MovieDetail
-                  title={this.state.result.Title}
-                  src={this.state.result.Poster}
-                  director={this.state.result.Director}
-                  genre={this.state.result.Genre}
-                  released={this.state.result.Released}
+              {this.state.result.name ? (
+                <UserDetail
+                  name={this.state.result.name}
+                  src={this.state.result.picture.thumbnail}
+                  email={this.state.result.email}
+                  phone={this.state.result.phone}
                 />
               ) : (
-                <h3>No Results to Display</h3>
-              )}
+                  <h3>No Results to Display</h3>
+                )}
             </Card>
           </Col>
           <Col size="md-4">
@@ -74,4 +73,4 @@ class OmdbContainer extends Component {
   }
 }
 
-export default OmdbContainer;
+export default EmployeeContainer;
