@@ -10,12 +10,16 @@ import API from "../utils/API";
 class EmployeeContainer extends Component {
   state = {
     result: {},
-    search: ""
+    search: "",
+    employeeList: []
   };
 
-  // When this component mounts, search for the movie "The Matrix"
+  // When this component mounts, call API to find random users when the page first loads
   componentDidMount() {
-    this.searchUsers("John Smith");
+    // console.log(res.data);
+    API.getAllEmployees().then(res => this.setState({
+      employeeList: res.data.results
+    })).catch(err => console.log(err))
   }
 
   searchUsers = query => {
@@ -32,7 +36,7 @@ class EmployeeContainer extends Component {
     });
   };
 
-  // When the form is submitted, search the OMDB API for the value of `this.state.search`
+  // When the form is submitted, search the Random User API for the value of `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
     this.searchUsers(this.state.search);
@@ -44,17 +48,17 @@ class EmployeeContainer extends Component {
         <Row>
           <Col size="md-8">
             <Card
-              heading={this.state.result.name || "Employee Directory"}
+              heading={"Employee Directory"}
             >
               {this.state.result.name ? (
                 <UserDetail
-                  name={this.state.result.name}
+                  name={this.state.result.name.first}
                   src={this.state.result.picture.thumbnail}
                   email={this.state.result.email}
                   phone={this.state.result.phone}
                 />
               ) : (
-                  <h3>No Results to Display</h3>
+                  <h3>employeeList</h3>
                 )}
             </Card>
           </Col>
