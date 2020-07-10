@@ -1,6 +1,6 @@
 import React from "react";
 function UserDetail(props) {
-  console.log(props)
+  // console.log(props)
   return (
     <table>
       <thead>
@@ -13,7 +13,7 @@ function UserDetail(props) {
       </thead>
       <tbody className="">
         {props.results.map(result => (
-          <tr>
+          <tr key={result.login.uuid}>
             <td><img alt="" src={result.picture.thumbnail} style={{ margin: "0 auto" }} /></td>
             <td><h3>{result.name.first + " " + result.name.last}</h3></td>
             <td><h3>{result.email}</h3></td>

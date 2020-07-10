@@ -46,14 +46,6 @@ class EmployeeContainer extends Component {
     return (
       <Container>
         <Row>
-          <Col size="md-8">
-            <Card
-              heading={"Employee Directory"}
-            >
-              <UserDetail results={this.state.employeeList} />
-
-            </Card>
-          </Col>
           <Col size="md-4">
             <Card heading="Search">
               <SearchForm
@@ -61,6 +53,16 @@ class EmployeeContainer extends Component {
                 handleInputChange={this.handleInputChange}
                 handleFormSubmit={this.handleFormSubmit}
               />
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col size="md-8">
+            <Card
+              heading={"Employee Directory"}
+            >
+              <UserDetail results={this.state.employeeList} />
+
             </Card>
           </Col>
         </Row>
