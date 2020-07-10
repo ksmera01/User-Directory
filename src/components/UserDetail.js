@@ -1,14 +1,30 @@
 import React from "react";
-
 function UserDetail(props) {
+  console.log(props)
   return (
-    <div className="text-center">
-      <img alt={props.results.name.first} className="img-fluid" src={props.results.picture.thumbnail} style={{ margin: "0 auto" }} />
-      <h3>Name: {props.results.name.first} {props.name.last}</h3>
-      <h3>Email: {props.results.email}</h3>
-      <h3>Phone: {props.results.phone}</h3>
-    </div>
-  );
+    <table>
+      <thead>
+        <tr>
+          <th>Headshot</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      <tbody className="">
+        {props.results.map(result => (
+          <tr>
+            <td><img alt="" src={result.picture.thumbnail} style={{ margin: "0 auto" }} /></td>
+            <td><h3>{result.name.first + " " + result.name.last}</h3></td>
+            <td><h3>{result.email}</h3></td>
+            <td><h3>{result.phone}</h3></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+
 }
+
 
 export default UserDetail;

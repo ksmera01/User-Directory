@@ -9,7 +9,7 @@ import API from "../utils/API";
 
 class EmployeeContainer extends Component {
   state = {
-    result: {},
+    // result: {},
     search: "",
     employeeList: []
   };
@@ -50,16 +50,8 @@ class EmployeeContainer extends Component {
             <Card
               heading={"Employee Directory"}
             >
-              {this.state.result.name ? (
-                <UserDetail
-                  name={this.state.result.name.first}
-                  src={this.state.result.picture.thumbnail}
-                  email={this.state.result.email}
-                  phone={this.state.result.phone}
-                />
-              ) : (
-                  <h3>employeeList</h3>
-                )}
+              <UserDetail results={this.state.employeeList} />
+
             </Card>
           </Col>
           <Col size="md-4">
