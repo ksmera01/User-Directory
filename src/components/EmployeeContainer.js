@@ -65,10 +65,15 @@ class EmployeeContainer extends Component {
   };
 
   //When the user clicks search button, need to figure out
-  handleFormSubmit = event => {
-    event.preventDefault();
-    this.searchUsers(this.state.search);
-  };
+  // handleFormSubmit = event => {
+  //   event.preventDefault();
+  //   const employeeList = this.state.employeeList,
+  //     search = this.state.search
+
+  //   this.setState({
+  //     employeeFilter
+  //   });
+  // };
 
   render() {
     return (
@@ -79,7 +84,7 @@ class EmployeeContainer extends Component {
               <SearchForm
                 employee={this.state.employeeList}
                 handleInputChange={this.handleInputChange}
-                handleFormSubmit={this.handleFormSubmit}
+              // handleFormSubmit={this.handleFormSubmit}
               />
             </Card>
           </Col>
