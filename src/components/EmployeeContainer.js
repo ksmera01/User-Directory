@@ -25,6 +25,7 @@ class EmployeeContainer extends Component {
     })).catch(err => console.log(err))
   }
 
+  //This sorts the employee by first name when the Name table header is clicked
   sortEmpByName = () => {
     const empFilter = this.state.employeeFilter;
     // console.log(empFilter)
@@ -45,21 +46,25 @@ class EmployeeContainer extends Component {
     }
   }
 
-  searchUsers = query => {
-    API.search(query)
-      .then(res => this.setState({ result: res.data }))
-      .catch(err => console.log(err));
+  //Searches all users and sets state
+  searchUsers = () => {
+    API.getAllEmployees().then(res => this.setState({
+      employeeList: res.data.results,
+      employeeFilter: res.data.results,
+    })).catch(err => console.log(err));
   };
 
+  //Dynamic user input functionality to match values already in table from API call to RandomUser
   handleInputChange = event => {
-    const value = event.target.value;
-    const name = event.target.name;
+    const employeeList = this.state.employeeList;
+    const input = event.target.value.toLowerCase();
+    const employeeFilter = employeeList.filter(employee => employee.name.first.toLowerCase().indexOf(input) > -1)
     this.setState({
-      [name]: value
+      employeeFilter
     });
   };
 
-  // When the form is submitted, search the Random User API for the value of `this.state.search`
+  //When the user clicks search button, need to figure out
   handleFormSubmit = event => {
     event.preventDefault();
     this.searchUsers(this.state.search);
@@ -72,7 +77,7 @@ class EmployeeContainer extends Component {
           <Col size="md-4">
             <Card heading="Search">
               <SearchForm
-                value={this.state.search}
+                employee={this.state.employeeList}
                 handleInputChange={this.handleInputChange}
                 handleFormSubmit={this.handleFormSubmit}
               />
@@ -84,7 +89,7 @@ class EmployeeContainer extends Component {
             <Card
               heading={"Employee Directory"}
             >
-              <UserDetail results={this.state.employeeList}
+              <UserDetail results={this.state.employeeFilter}
                 sortEmpByName={this.sortEmpByName}
               />
 
