@@ -1,4 +1,5 @@
 import React from "react";
+
 function UserDetail(props) {
   // console.log(props)
   return (
@@ -6,7 +7,7 @@ function UserDetail(props) {
       <thead>
         <tr>
           <th>Headshot</th>
-          <th>Name</th>
+          <th onClick={props.sortEmpByName}>Name</th>
           <th>Email</th>
           <th>Phone</th>
         </tr>
@@ -14,7 +15,7 @@ function UserDetail(props) {
       <tbody className="">
         {props.results.map(result => (
           <tr key={result.login.uuid}>
-            <td><img alt="" src={result.picture.thumbnail} style={{ margin: "0 auto" }} /></td>
+            <td><img alt="" src={result.picture.thumbnail} /></td>
             <td><h3>{result.name.first + " " + result.name.last}</h3></td>
             <td><h3>{result.email}</h3></td>
             <td><h3>{result.phone}</h3></td>

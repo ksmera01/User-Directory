@@ -11,15 +11,38 @@ class EmployeeContainer extends Component {
   state = {
     // result: {},
     search: "",
-    employeeList: []
+    employeeList: [],
+    employeeFilter: [],
+    listOrder: ""
   };
 
   // When this component mounts, call API to find random users when the page first loads
   componentDidMount() {
     // console.log(res.data);
     API.getAllEmployees().then(res => this.setState({
-      employeeList: res.data.results
+      employeeList: res.data.results,
+      employeeFilter: res.data.results
     })).catch(err => console.log(err))
+  }
+
+  sortEmpByName = () => {
+    const empFilter = this.state.employeeFilter;
+    // console.log(empFilter)
+    if (this.state.listOrder === "ascending") {
+      const empSort = empFilter.sort((empA, empB) => (empA.name.first > empB.name.first) ? 1 : -1)
+      // console.log(empSort)
+      this.setState({
+        employeeFilter: empSort,
+        listOrder: "descending"
+      })
+    } else {
+      const empSort = empFilter.sort((empA, empB) => (empA.name.first > empB.name.first) ? -1 : 1)
+      // console.log(empSort)
+      this.setState({
+        employeeFilter: empSort,
+        listOrder: "ascending"
+      })
+    }
   }
 
   searchUsers = query => {
@@ -61,7 +84,9 @@ class EmployeeContainer extends Component {
             <Card
               heading={"Employee Directory"}
             >
-              <UserDetail results={this.state.employeeList} />
+              <UserDetail results={this.state.employeeList}
+                sortEmpByName={this.sortEmpByName}
+              />
 
             </Card>
           </Col>
