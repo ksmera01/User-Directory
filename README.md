@@ -4,7 +4,7 @@
 
   Welcome to the new Employee Directory! This new app uses React to make managing your employees simple. This project had requirements to break up the application's UI into components, manage component state, and respond to user events. As a user, one is able to view the entire employee directory at once so that they have quick access to their information. Additionally, an employee or manager is able to view non-sensitive data about other employees while also given the ability to filter employees by name. Please enjoy!
 
-  ![image description](./images/folder.jpg)
+  ![image description](./images/folder.png)
 
   ## Table of Contents
   
